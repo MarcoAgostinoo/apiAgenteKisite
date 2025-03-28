@@ -383,3 +383,196 @@ Para desenvolver localmente:
 - CORS configurado para permitir apenas domínios específicos
 - Headers de segurança personalizados
 - Suporte a autenticação via tokens 
+
+## Expondo o Servidor para a Internet
+
+Este projeto utiliza PM2 (Process Manager) e ngrok para expor o servidor local para a internet de forma segura e gerenciável.
+
+### Pré-requisitos
+
+1. Instale as dependências globais:
+```bash
+npm install -g ngrok pm2
+```
+
+2. Registre-se em [ngrok.com](https://ngrok.com) e configure seu authtoken:
+```bash
+ngrok authtoken seu_token_aqui
+```
+
+### Estrutura de Arquivos
+
+#### ecosystem.config.js
+```javascript
+module.exports = {
+  apps: [{
+    name: "agente-kisite",
+    script: "./index.js",
+    watch: true,
+    env: {
+      "NODE_ENV": "development",
+    },
+    env_production: {
+      "NODE_ENV": "production"
+    },
+    error_file: "./logs/err.log",
+    out_file: "./logs/out.log",
+    log_file: "./logs/combined.log",
+    time: true,
+    instances: 1,
+    autorestart: true,
+    max_restarts: 10,
+    restart_delay: 4000
+  }]
+}
+```
+
+#### start-server.js
+```javascript
+const ngrok = require('ngrok');
+const { exec } = require('child_process');
+const { SERVER_CONFIG } = require('./src/config/config');
+
+async function startServer() {
+    try {
+        // Inicia o PM2
+        console.log('Iniciando servidor com PM2...');
+        exec('pm2 start ecosystem.config.js', async (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Erro ao iniciar PM2: ${error}`);
+                return;
+            }
+            console.log('PM2 iniciado com sucesso!');
+            
+            try {
+                // Conecta o ngrok
+                console.log('Iniciando túnel ngrok...');
+                const url = await ngrok.connect({
+                    addr: SERVER_CONFIG.port,
+                    authtoken: process.env.NGROK_AUTH_TOKEN
+                });
+                
+                console.log('=================================');
+                console.log('🚀 Servidor iniciado com sucesso!');
+                console.log(`📡 URL Local: http://localhost:${SERVER_CONFIG.port}`);
+                console.log(`🌎 URL Pública: ${url}`);
+                console.log('=================================');
+                
+                require('fs').writeFileSync('ngrok-url.txt', url);
+                
+            } catch (ngrokError) {
+                console.error('Erro ao iniciar ngrok:', ngrokError);
+                exec('pm2 stop all');
+            }
+        });
+    } catch (error) {
+        console.error('Erro ao iniciar servidor:', error);
+    }
+}
+
+// Função para limpar recursos ao encerrar
+function cleanup() {
+    exec('pm2 stop all', () => {
+        ngrok.kill();
+        process.exit(0);
+    });
+}
+
+process.on('SIGINT', cleanup);
+process.on('SIGTERM', cleanup);
+
+startServer();
+```
+
+### Scripts Disponíveis
+
+No package.json, você encontrará os seguintes scripts:
+
+```json
+{
+  "scripts": {
+    "start": "node index.js",
+    "start:prod": "node start-server.js",
+    "stop": "pm2 stop all",
+    "logs": "pm2 logs",
+    "status": "pm2 status"
+  }
+}
+```
+
+### Como Usar
+
+1. **Iniciar o Servidor**:
+```bash
+npm run start:prod
+```
+
+2. **Verificar Status**:
+```bash
+npm run status
+```
+
+3. **Visualizar Logs**:
+```bash
+npm run logs
+```
+
+4. **Parar o Servidor**:
+```bash
+npm run stop
+```
+
+### Características
+
+#### PM2
+- Gerenciamento de processos Node.js
+- Reinício automático em caso de falhas
+- Logs organizados
+- Monitoramento de performance
+
+#### ngrok
+- Túnel seguro HTTPS
+- URL pública acessível
+- Painel de administração web
+- Inspeção de tráfego
+- Proteção contra DDoS básica
+
+### Observações Importantes
+
+1. **URL do ngrok**:
+   - Na versão gratuita, a URL muda a cada reinicialização
+   - Para URL fixa, considere o plano pago
+
+2. **Segurança**:
+   - Mantenha o `authtoken` do ngrok em variáveis de ambiente
+   - Configure corretamente o CORS para os domínios permitidos
+   - Use HTTPS em produção
+
+3. **Produção**:
+   - Esta configuração é ideal para desenvolvimento e testes
+   - Para ambiente de produção, considere:
+     - Serviços de hospedagem (Heroku, DigitalOcean, AWS)
+     - Domínio próprio
+     - SSL dedicado
+
+4. **Monitoramento**:
+   - Use `npm run status` para verificar a saúde do servidor
+   - Logs são salvos em ./logs/
+   - A URL pública é salva em ngrok-url.txt
+
+### Troubleshooting
+
+1. **Erro ao iniciar ngrok**:
+   - Verifique se o authtoken está configurado
+   - Confirme se a porta não está em uso
+   - Verifique as variáveis de ambiente
+
+2. **PM2 não inicia**:
+   - Verifique os logs com `npm run logs`
+   - Confirme se não há outras instâncias rodando
+   - Verifique permissões de arquivo
+
+3. **Problemas de conexão**:
+   - Confirme se o firewall não está bloqueando
+   - Verifique se a porta está correta
+   - Teste localmente antes de expor 

@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "start:prod": "node start-server.js",
+    "stop": "pm2 stop all",
+    "logs": "pm2 logs",
+    "status": "pm2 status"
   },
   "keywords": [
     "kisite",
@@ -24,6 +28,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.1.0",
+    "ngrok": "^5.0.0-beta.2",
     "qrcode-terminal": "^0.12.0",
     "whatsapp-web.js": "^1.26.0",
     "winston": "^3.17.0"
