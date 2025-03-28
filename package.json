@@ -1,10 +1,11 @@
 {
   "name": "backend-agente-ia",
   "version": "1.0.0",
-  "description": "",
+  "description": "API de atendimento automático para a KiSite, oferecendo integração com WhatsApp e processamento de mensagens utilizando IA.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,8 +13,20 @@
   "dependencies": {
     "axios": "^1.8.4",
     "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "helmet": "^8.1.0",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.26.0"
-  }
+    "whatsapp-web.js": "^1.26.0",
+    "winston": "^3.17.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcoAgostinoo/apiAgenteKisite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MarcoAgostinoo/apiAgenteKisite/issues"
+  },
+  "homepage": "https://github.com/MarcoAgostinoo/apiAgenteKisite#readme"
 }
