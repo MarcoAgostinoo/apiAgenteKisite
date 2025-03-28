@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente KiSite - QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        #qrcode {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+        #qrcode img {
+            display: block;
+            margin: 0 auto;
+            max-width: 256px;
+            height: auto;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .connected {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .waiting {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .reconnecting {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        #debug {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            display: none;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1976d2;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #1565c0;
+        }
+        .button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #qrTimer {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agente KiSite</h1>
+        <div id="qrcode"></div>
+        <div id="qrTimer"></div>
+        <div id="status" class="status waiting">
+            Aguardando QR Code...
+        </div>
+        <button id="restartButton" class="button" style="display: none;" onclick="restartWhatsApp()">
+            Reiniciar WhatsApp
+        </button>
+        <div id="debug"></div>
+    </div>
+
+    <script>
+        const debug = document.getElementById('debug');
+        const qrcodeDiv = document.getElementById('qrcode');
+        const statusDiv = document.getElementById('status');
+        const restartButton = document.getElementById('restartButton');
+        const qrTimer = document.getElementById('qrTimer');
+        let ws;
+        let reconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
+        let qrTimeout;
+        
+        function log(message) {
+            console.log(message);
+            debug.style.display = 'block';
+            debug.textContent = new Date().toISOString() + ': ' + message + '\n' + debug.textContent;
+        }
+        
+        function updateStatus(message, type) {
+            log('Status atualizado: ' + message);
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+
+        function clearQRCode() {
+            qrcodeDiv.innerHTML = '';
+            qrcodeDiv.style.display = 'none';
+            qrTimer.style.display = 'none';
+            if (qrTimeout) {
+                clearTimeout(qrTimeout);
+                qrTimeout = null;
+            }
+        }
+
+        function showQRCode() {
+            qrcodeDiv.style.display = 'block';
+            qrTimer.style.display = 'block';
+            startQRTimer();
+        }
+
+        function startQRTimer() {
+            let timeLeft = 60; // 60 segundos
+            qrTimer.textContent = `QR Code expira em ${timeLeft} segundos`;
+
+            if (qrTimeout) {
+                clearTimeout(qrTimeout);
+            }
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                qrTimer.textContent = `QR Code expira em ${timeLeft} segundos`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    showRestartButton();
+                }
+            }, 1000);
+
+            qrTimeout = setTimeout(() => {
+                clearInterval(timer);
+                updateStatus('QR Code expirado. Clique em Reiniciar.', 'error');
+                showRestartButton();
+            }, 60000);
+        }
+
+        function showRestartButton() {
+            restartButton.style.display = 'inline-block';
+        }
+
+        function hideRestartButton() {
+            restartButton.style.display = 'none';
+        }
+
+        async function generateQRCode(qrData) {
+            try {
+                // Gera a URL de dados do QR code usando a API do QRServer
+                const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrData)}&size=256x256`;
+                
+                // Cria a imagem do QR code
+                const img = document.createElement('img');
+                img.src = qrImageUrl;
+                img.alt = 'QR Code do WhatsApp';
+                
+                // Limpa o conteúdo anterior e adiciona a nova imagem
+                qrcodeDiv.innerHTML = '';
+                qrcodeDiv.appendChild(img);
+                
+                showQRCode();
+                updateStatus('Escaneie o QR Code com seu WhatsApp', 'waiting');
+                hideRestartButton();
+            } catch (error) {
+                log('Erro ao gerar QR code: ' + error);
+                updateStatus('Erro ao gerar QR Code', 'error');
+                showRestartButton();
+            }
+        }
+
+        async function restartWhatsApp() {
+            try {
+                restartButton.disabled = true;
+                updateStatus('Reiniciando WhatsApp...', 'waiting');
+                
+                const response = await fetch('/api/restart-whatsapp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erro ao reiniciar WhatsApp');
+                }
+                
+                clearQRCode();
+                updateStatus('Aguardando novo QR Code...', 'waiting');
+            } catch (error) {
+                log('Erro ao reiniciar: ' + error);
+                updateStatus('Erro ao reiniciar. Tente novamente.', 'error');
+            } finally {
+                restartButton.disabled = false;
+            }
+        }
+
+        function connectWebSocket() {
+            if (reconnectAttempts >= maxReconnectAttempts) {
+                updateStatus('Erro ao conectar. Por favor, recarregue a página.', 'error');
+                showRestartButton();
+                return;
+            }
+
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}`;
+            log('Conectando ao WebSocket: ' + wsUrl);
+            
+            ws = new WebSocket(wsUrl);
+            
+            ws.onopen = function() {
+                log('WebSocket conectado');
+                reconnectAttempts = 0;
+                updateStatus('Aguardando QR Code...', 'waiting');
+                hideRestartButton();
+            };
+            
+            ws.onmessage = function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    log('Mensagem recebida: ' + data.type);
+                    
+                    switch(data.type) {
+                        case 'qr':
+                            generateQRCode(data.qr);
+                            break;
+                        case 'ready':
+                        case 'authenticated':
+                            clearQRCode();
+                            updateStatus('WhatsApp conectado!', 'connected');
+                            hideRestartButton();
+                            break;
+                        case 'disconnected':
+                            showQRCode();
+                            updateStatus('WhatsApp desconectado. Aguardando reconexão...', 'waiting');
+                            showRestartButton();
+                            break;
+                        case 'auth_failure':
+                            updateStatus('Falha na autenticação do WhatsApp', 'error');
+                            showRestartButton();
+                            break;
+                        case 'error':
+                            updateStatus(data.error || 'Erro desconhecido', 'error');
+                            showRestartButton();
+                            break;
+                        case 'status':
+                            updateStatus(data.message || 'Atualizando status...', 'waiting');
+                            break;
+                    }
+                } catch (error) {
+                    log('Erro ao processar mensagem: ' + error);
+                    updateStatus('Erro ao processar mensagem', 'error');
+                    showRestartButton();
+                }
+            };
+
+            ws.onclose = function() {
+                log('WebSocket desconectado');
+                reconnectAttempts++;
+                updateStatus('Reconectando...', 'waiting reconnecting');
+                showRestartButton();
+                setTimeout(connectWebSocket, 1000);
+            };
+
+            ws.onerror = function(error) {
+                log('Erro no WebSocket: ' + error);
+                updateStatus('Erro de conexão', 'error');
+                showRestartButton();
+            };
+        }
+
+        // Inicia a conexão quando a página carrega
+        connectWebSocket();
+
+        // Adiciona botão para mostrar/esconder debug
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'd') {
+                debug.style.display = debug.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+
+        // Se após 10 segundos não tivermos QR code, mostramos o botão de reiniciar
+        setTimeout(() => {
+            if (!qrcodeDiv.hasChildNodes()) {
+                showRestartButton();
+                updateStatus('QR Code não gerado. Tente reiniciar.', 'error');
+            }
+        }, 10000);
+    </script>
+</body>
+</html> 

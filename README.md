@@ -150,6 +150,59 @@ Inicia manualmente o processo de limpeza das conversas antigas (mais de 60 dias)
 }
 ```
 
+## Testando a API com Thunder Client
+
+O Thunder Client é uma extensão leve para o VS Code que funciona como um cliente HTTP para testar APIs. Você pode usá-lo para enviar requisições à API do Agente KiSite.
+
+### Configuração do Thunder Client
+
+1. Instale a extensão "Thunder Client" no VS Code
+   - Abra o VS Code, vá para a guia de extensões (Ctrl+Shift+X) e pesquise por "Thunder Client"
+   - Clique em "Instalar"
+
+### Teste da Rota POST /api/chat
+
+Para testar o envio de mensagens via API:
+
+1. Abra o Thunder Client no VS Code
+2. Crie uma nova requisição (New Request)
+3. Configure a requisição:
+   - Método: **POST**
+   - URL: `http://localhost:3000/api/chat`
+
+4. Configure os Headers:
+   - Clique na aba "Headers"
+   - Adicione:
+     ```
+     Content-Type: application/json
+     x-user-id: seu-nome-de-usuario  (opcional)
+     ```
+
+5. Configure o Body:
+   - Clique na aba "Body"
+   - Selecione "JSON" como formato
+   - Insira o seguinte JSON:
+     ```json
+     {
+       "message": "Olá, gostaria de saber mais sobre os serviços da KiSite"
+     }
+     ```
+
+6. Clique em "Send" para enviar a requisição
+
+7. Verifique a resposta:
+   - Status: 200 OK
+   - Corpo da resposta (exemplo):
+     ```json
+     {
+       "success": true,
+       "message": "Olá! Sou o assistente virtual da KiSite. Posso te ajudar com informações sobre nossos serviços...",
+       "history": [...]
+     }
+     ```
+
+8. A conversa será automaticamente salva no diretório `conversas/` com o nome do arquivo baseado no ID do usuário fornecido no header `x-user-id` (ou "web_user.txt" se não for especificado).
+
 ## Configuração de Segurança e CORS
 
 A API foi configurada com políticas de CORS específicas para garantir acesso seguro apenas dos domínios autorizados:
