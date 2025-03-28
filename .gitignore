@@ -7,6 +7,11 @@ yarn.lock
 .wwebjs_auth/
 .wwebjs_cache/
 
+# Dados sensíveis de conversas com clientes
+conversas/*
+!conversas/README.md
+*.txt
+
 # Environment variables
 .env
 .env.local

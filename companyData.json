@@ -1,0 +1,66 @@
+{
+  "about": "A KiSite se estabelece como uma provedora de soluções digitais sob medida para pequenas e médias empresas. O cerne de nossa oferta reside na criação de websites profissionais com um prazo de entrega de apenas 7 dias úteis, complementado por um agente de atendimento ao cliente impulsionado por inteligência artificial, disponível 24 horas por dia, 7 dias por semana. Nosso objetivo primordial é capacitar empresas a consolidarem uma presença online robusta, automatizarem o atendimento ao cliente, otimizarem a geração de leads e, em última instância, impulsionarem suas vendas.",
+  "services": [
+    "Criação de websites profissionais em 7 dias",
+    "Agente Inteligente com IA para atendimento 24/7 via WhatsApp",
+    "Integração Estratégica entre site e Agente de IA",
+    "Otimização para SEO",
+    "Conformidade com LGPD",
+    "Marketing Digital"
+  ],
+  "contact": "Você pode nos contatar pelo e-mail contact@kisite.com.br ou visitar nosso site em https://www.kisite.com.br/",
+  "precos": {
+    "site_essencial": "R$897"
+  },
+  "site_essencial": {
+    "descricao": "Website profissional, responsivo e otimizado para o Google",
+    "caracteristicas": [
+      "Entregue em 7 dias",
+      "Design responsivo para alcance de clientes móveis",
+      "Otimização SEO",
+      "3 contas de e-mail profissional",
+      "Certificado SSL",
+      "Conformidade com a LGPD",
+      "Suporte técnico"
+    ],
+    "preco": "R$897"
+  },
+  "agente_inteligente": {
+    "descricao": "Agente de vendas virtual com IA, atendimento 24/7 no WhatsApp",
+    "caracteristicas": [
+      "Responde a perguntas",
+      "Gera leads automaticamente",
+      "Economia de custos comparado à contratação de vendedor CLT",
+      "Aumento de 40% nos leads qualificados"
+    ]
+  },
+  "integracao_estrategica": {
+    "descricao": "Conexão entre o website e o Agente de IA",
+    "caracteristicas": [
+      "Potencializa a geração de leads",
+      "Oferece suporte instantâneo aos visitantes",
+      "Personalização de experiência",
+      "Aumento de 30% nas taxas de conversão"
+    ]
+  },
+  "estatisticas": {
+    "uso_smartphone": "85% dos brasileiros realizam buscas no Google por meio de seus smartphones",
+    "aumento_leads": "Aumento de 40% nos leads qualificados com o Agente Inteligente",
+    "taxa_conversao": "Aumento de 30% nas taxas de conversão com a Integração Estratégica"
+  },
+  "funcionalidades_adicionais": [
+    "Campanhas de Marketing Digital",
+    "Gestão de Tráfego Pago",
+    "Integração de E-commerce",
+    "Blogs com Painéis Administrativos",
+    "Portais de Notícias",
+    "Painéis Administrativos Personalizados",
+    "Automação de Marketing Avançada",
+    "Formulários Inteligentes",
+    "Integração com Gateways de Pagamento",
+    "Criação e Gestão de Campanhas no Google Ads",
+    "Formulários Interativos para Geração de Leads",
+    "APIs Personalizadas",
+    "Design Mobile-First"
+  ]
+}
