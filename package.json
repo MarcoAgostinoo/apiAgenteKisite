@@ -7,8 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "kisite",
+    "whatsapp",
+    "ai",
+    "chatbot",
+    "atendimento"
+  ],
+  "author": "Marco D' Melo <contato@kisite.com.br>",
+  "company": "KiSite - Soluções Digitais",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.8.4",

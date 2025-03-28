@@ -1,4 +1,7 @@
-# API Agente KiSite
+# Agente KiSite - Atendimento Automático com IA
+
+> Desenvolvido por Marco D' Melo para KiSite - Soluções Digitais
+> Copyright © 2024 KiSite. Todos os direitos reservados.
 
 API de atendimento automático para a KiSite, oferecendo integração com WhatsApp e processamento de mensagens utilizando IA.
 
@@ -145,4 +148,238 @@ Inicia manualmente o processo de limpeza das conversas antigas (mais de 60 dias)
 {
   "message": "Processo de limpeza de conversas antigas iniciado com sucesso."
 }
-``` 
+```
+
+## Configuração de Segurança e CORS
+
+A API foi configurada com políticas de CORS específicas para garantir acesso seguro apenas dos domínios autorizados:
+
+- https://www.kisite.com.br
+- http://localhost:3000
+
+### Headers de Segurança Implementados
+
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `X-XSS-Protection: 1; mode=block`
+
+## Como Consumir a API
+
+### Exemplo de Requisição
+
+```javascript
+const API_URL = 'http://seu-backend:porta/api'; // Substitua pela URL do backend
+
+async function callApi() {
+    try {
+        const response = await fetch(`${API_URL}/seu-endpoint`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer seu-token' // Se necessário
+            },
+            credentials: 'include', // Importante para enviar cookies/credenciais
+            body: JSON.stringify({
+                // seus dados aqui
+            })
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro ao chamar API:', error);
+    }
+}
+```
+
+### Exemplo em React
+
+```typescript
+// api.ts - Arquivo de configuração da API
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: process.env.REACT_APP_API_URL || 'http://seu-backend:porta/api',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    withCredentials: true // Importante para enviar cookies/credenciais
+});
+
+export default api;
+
+// ExemploComponente.tsx - Componente React usando a API
+import React, { useState, useEffect } from 'react';
+import api from './api';
+
+interface Message {
+    userId: string;
+    message: string;
+    response: string;
+}
+
+const ExemploComponente: React.FC = () => {
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
+    const [response, setResponse] = useState<Message | null>(null);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        try {
+            const { data } = await api.post<Message>('/chat', {
+                message,
+                userId: 'exemplo-usuario'
+            });
+            
+            setResponse(data);
+        } catch (err) {
+            setError('Erro ao enviar mensagem. Tente novamente.');
+            console.error('Erro:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Digite sua mensagem"
+                    disabled={loading}
+                />
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Enviando...' : 'Enviar'}
+                </button>
+            </form>
+
+            {error && <div style={{ color: 'red' }}>{error}</div>}
+            
+            {response && (
+                <div>
+                    <h3>Resposta:</h3>
+                    <p>{response.response}</p>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default ExemploComponente;
+
+// Hook personalizado para reutilização
+import { useState, useCallback } from 'react';
+
+interface UseApiResponse<T> {
+    data: T | null;
+    loading: boolean;
+    error: string | null;
+    makeRequest: (endpoint: string, options?: RequestInit) => Promise<void>;
+}
+
+export function useApi<T>(): UseApiResponse<T> {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const makeRequest = useCallback(async (endpoint: string, options?: RequestInit) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await api.request({
+                url: endpoint,
+                ...options
+            });
+            setData(response.data);
+        } catch (err) {
+            setError('Erro na requisição. Tente novamente.');
+            console.error('Erro:', err);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    return { data, loading, error, makeRequest };
+}
+```
+
+O exemplo acima inclui:
+- Configuração do Axios para requisições
+- Componente React funcional com TypeScript
+- Gerenciamento de estado com useState
+- Tratamento de loading e erros
+- Hook personalizado para reutilização
+- Tipagem completa com TypeScript
+- Formulário básico com exemplo de envio
+
+### Configurações CORS Implementadas
+
+```javascript
+{
+    origin: [
+        'https://www.kisite.com.br',
+        'http://localhost:3000'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    maxAge: 600, // Cache preflight por 10 minutos
+    credentials: true // Permite credenciais (cookies, headers de autorização)
+}
+```
+
+### Características de Segurança
+
+1. **Domínios Restritos**: Apenas os domínios autorizados podem acessar a API
+2. **Suporte a Credenciais**: Configurado para trabalhar com cookies e tokens de autenticação
+3. **Cache de Preflight**: Otimizado para reduzir requisições OPTIONS
+4. **Headers de Segurança**: Proteção contra ataques comuns como XSS e clickjacking
+
+### Métodos HTTP Suportados
+
+- GET: Buscar dados
+- POST: Criar novos recursos
+- PUT: Atualizar recursos existentes
+- DELETE: Remover recursos
+- OPTIONS: Preflight CORS
+
+### Headers Permitidos
+
+- Content-Type
+- Authorization
+
+### Headers Expostos
+
+- Content-Range
+- X-Content-Range
+
+## Tratamento de Erros
+
+A API inclui tratamento robusto de erros, incluindo:
+
+- Logging automático de erros
+- Tratamento de exceções não capturadas
+- Tratamento de rejeições de promises
+- Respostas de erro padronizadas
+
+## Desenvolvimento
+
+Para desenvolver localmente:
+
+1. Clone o repositório
+2. Instale as dependências: `npm install`
+3. Configure as variáveis de ambiente
+4. Execute: `npm start`
+
+## Segurança
+
+- Utiliza Helmet para proteção contra vulnerabilidades comuns
+- CORS configurado para permitir apenas domínios específicos
+- Headers de segurança personalizados
+- Suporte a autenticação via tokens 

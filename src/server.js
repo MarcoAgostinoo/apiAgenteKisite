@@ -1,4 +1,12 @@
 /**
+ * Agente KiSite - Sistema de Atendimento Automático
+ * 
+ * @author Marco D' Melo <contato@kisite.com.br>
+ * @copyright 2024 KiSite - Soluções Digitais
+ * @license ISC
+ */
+
+/**
  * Arquivo principal que inicializa o servidor e WhatsApp
  */
 

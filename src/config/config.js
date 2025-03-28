@@ -14,10 +14,10 @@ const SERVER_CONFIG = {
 
 // Configurações da API do LM Studio
 const LM_STUDIO_CONFIG = {
-    apiUrl: process.env.LM_STUDIO_API_URL || 'http://172.16.0.95:4152/api/v0/chat/completions',
-    model: process.env.LM_STUDIO_MODEL || 'gemma-3-1b-it',
-    temperature: 0.7,
-    maxTokens: 500
+    apiUrl: process.env.LM_STUDIO_API_URL || '',
+    model: process.env.LM_STUDIO_MODEL || 'default-model',
+    temperature: process.env.LM_STUDIO_TEMPERATURE || 0.7,
+    maxTokens: process.env.LM_STUDIO_MAX_TOKENS || 500
 };
 
 // Configurações de armazenamento
