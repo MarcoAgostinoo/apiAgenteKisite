@@ -1,0 +1,101 @@
+{
+  "mercado": {
+    "perda_clientes": "76% das pequenas empresas perdem clientes diariamente por não terem presença digital profissional ou atendimento eficiente (DataSebrae 2025)",
+    "uso_smartphone": "85% dos brasileiros pesquisam no Google pelo smartphone (IBGE 2025)",
+    "comercio_eletronico": "O e-commerce no Brasil vai faturar R$234 bilhões em 2025",
+    "consumidores_online": "94 milhões de consumidores estão online agora",
+    "compras_mobile": "Em 2024, 72% das compras online no Brasil foram feitas por celulares",
+    "site_confianca": "75% dos consumidores julgam a credibilidade de uma empresa pelo seu site",
+    "tempo_carregamento": "53% dos usuários abandonam sites que demoram mais de 3 segundos para carregar"
+  },
+  "resultados_clientes": {
+    "aumento_leads": "Clientes relatam aumento de até 40% em leads qualificados com nossos agentes",
+    "taxa_conversao": "Empresas que integram site e Agente de I.A aumentam em 30% a taxa de conversão",
+    "transformacao_vendas": "Site Essencial transformou negócios com aumento de vendas em 40%",
+    "economia": "Agente de I.A tem custo 6x menor que um vendedor CLT e sem encargos trabalhistas",
+    "retorno_investimento": "ROI médio de 320% no primeiro ano para clientes do Site Essencial",
+    "reducao_custos": "Economia de até 60% nos custos de atendimento com o Agente Inteligente"
+  },
+  "integracoes": [
+    {
+      "nome": "Integração Estratégica: Site + Agente de I.A",
+      "descricao": "Conecte seu site ao Agente de I.A: turbine a geração de leads e ofereça suporte instantâneo aos visitantes",
+      "beneficios": [
+        "Personalização para seu negócio",
+        "Aumento de 30% na taxa de conversão",
+        "Atendimento 24/7"
+      ]
+    }
+  ],
+  "funcionalidades_adicionais": [
+    {
+      "nome": "Loja virtual",
+      "descricao": "Adicione recursos de e-commerce ao seu site",
+      "preco_adicional": "R$ 1.497,00"
+    },
+    {
+      "nome": "Blog",
+      "descricao": "Seção de conteúdo para estratégia de marketing",
+      "preco_adicional": "R$ 497,00"
+    },
+    {
+      "nome": "Área de membros",
+      "descricao": "Conteúdo exclusivo para clientes e assinantes",
+      "preco_adicional": "R$ 997,00"
+    },
+    {
+      "nome": "Agendamento online",
+      "descricao": "Sistema para marcação de consultas e reuniões",
+      "preco_adicional": "R$ 697,00"
+    },
+    {
+      "nome": "Chat ao vivo",
+      "descricao": "Atendimento em tempo real no site",
+      "preco_adicional": "R$ 297,00/mês"
+    }
+  ],
+  "diferenciais_mercado": [
+    "Entrega do site em apenas 7 dias úteis",
+    "Sites 100% responsivos e otimizados para mobile",
+    "SEO avançado para aparecer no Google sem anúncios",
+    "Agentes de I.A com custo 6x menor que um vendedor CLT",
+    "Tecnologia avançada com Next.js e Tailwind CSS"
+  ],
+  "projetos_destaque": [
+    "LcCopper Metalurgica eirelli",
+    "Garagem Oficina",
+    "Concursos Agora",
+    "Delicias da Deda",
+    "Modelo de Ecomerce"
+  ],
+  "perguntas_frequentes": [
+    {
+      "pergunta": "O que é a KiSite?",
+      "resposta": "A KiSite é especialista em transformar a presença digital de pequenas e médias empresas, oferecendo sites profissionais entregues em apenas 7 dias e Agente de I.A de atendimento 24/7."
+    },
+    {
+      "pergunta": "Quais soluções a KiSite oferece?",
+      "resposta": "Oferecemos criação rápida de sites modernos, integração com WhatsApp, Agente de I.A inteligentes com IA, SEO avançado e estratégias de marketing digital para potencializar suas vendas."
+    },
+    {
+      "pergunta": "Como a KiSite ajuda minha empresa a não perder clientes?",
+      "resposta": "Com um site otimizado e atendimento automatizado, sua empresa permanece acessível 24/7, atraindo e convertendo clientes de forma contínua."
+    }
+  ],
+  "parcerias": [
+    "Google Partner",
+    "Meta Business Partner",
+    "AWS Select Partner",
+    "HubSpot Solutions Partner"
+  ],
+  "premios": [
+    {
+      "nome": "Top 10 Agências Digitais 2023",
+      "instituicao": "Associação Brasileira de Agências Digitais"
+    },
+    {
+      "nome": "Prêmio Inovação Digital 2022",
+      "instituicao": "Fórum de Tecnologia e Inovação"
+    }
+  ]
+}

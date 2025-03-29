@@ -1,0 +1,67 @@
+{
+  "nome": "Agente Inteligente",
+  "descricao": "Seu vendedor virtual: atenda clientes 24/7 no WhatsApp, tire dúvidas e gere leads automaticamente.",
+  "caracteristicas": [
+    "Atendimento 24/7 via WhatsApp",
+    "IA treinada sobre seu negócio",
+    "Qualificação automática de leads",
+    "Transferência para humano quando necessário",
+    "Respostas personalizadas",
+    "Análise de conversas"
+  ],
+  "beneficios": [
+    "Economize até 6x: um Agente de atendimento inteligente custa menos que um vendedor CLT",
+    "Aumente suas vendas: Agentes de I.A geram 40% mais leads qualificados que o atendimento humano tradicional",
+    "Atendimento disponível 24 horas por dia, 7 dias por semana",
+    "Resposta imediata às dúvidas mais frequentes",
+    "Sem encargos trabalhistas (atestados, férias, 13º, FGTS)",
+    "Escalabilidade para lidar com picos de demanda"
+  ],
+  "casos_uso": [
+    "Responder perguntas frequentes sobre produtos e serviços",
+    "Agendar demonstrações e consultas",
+    "Coletar informações de leads",
+    "Qualificar potenciais clientes",
+    "Enviar catálogos e materiais informativos",
+    "Realizar pesquisas de satisfação"
+  ],
+  "integracoes": [
+    "WhatsApp Business",
+    "Site (chat online)",
+    "CRM",
+    "Sistemas de agendamento"
+  ],
+  "perguntas_frequentes": [
+    {
+      "pergunta": "Como funciona o atendimento automatizado com IA?",
+      "resposta": "Implementamos um Agente de IA inteligente que responde dúvidas, qualifica leads e gera vendas automaticamente, complementando sua equipe e reduzindo custos."
+    },
+    {
+      "pergunta": "O serviço de Agente de IA substitui o atendimento humano?",
+      "resposta": "Não, o Agente de IA complementa sua equipe ao oferecer atendimento 24/7, liberando tempo para que sua equipe se concentre em tarefas estratégicas."
+    },
+    {
+      "pergunta": "Quais os benefícios de integrar site e Agente de IA?",
+      "resposta": "A integração potencializa a geração de leads, melhora a experiência do usuário e aumenta a taxa de conversão, resultando em mais vendas para sua empresa."
+    },
+    {
+      "pergunta": "O Agente consegue entender linguagem natural?",
+      "resposta": "Sim, nossos agentes são treinados com tecnologia avançada de IA que compreende a linguagem natural e mantém conversas fluidas."
+    }
+  ],
+  "preco": {
+    "valor": "A partir de R$ 447,00/mês",
+    "economia": "Custo 6x menor que um vendedor CLT"
+  },
+  "depoimentos": [
+    {
+      "cliente": "Carlos Santos",
+      "empresa": "Consultoria RS",
+      "texto": "O atendimento por IA superou minhas expectativas. Economizei tempo e dinheiro, e meus clientes adoraram a rapidez nas respostas."
+    }
+  ],
+  "estatisticas": {
+    "aumento_leads": "40% mais leads qualificados que o atendimento humano tradicional",
+    "taxa_conversao": "Empresas que integram site e Agente de IA aumentam em 30% a taxa de conversão"
+  }
+}

@@ -1,6 +1,6 @@
 /**
- * Controlador para monitoramento e healthcheck
- * Fornece endpoints para verificar status do sistema
+ * Controlador para monitoramento da saúde do sistema
+ * Fornece endpoints para verificar o status dos componentes
  */
 
 const { version } = require('../../package.json');
@@ -8,59 +8,89 @@ const logger = require('../utils/logger');
 const os = require('os');
 const axios = require('axios');
 const { LM_STUDIO_CONFIG } = require('../config/config');
+const { treinamentoDados } = require('../services/companyService');
 
 /**
- * Retorna informações básicas sobre o estado do sistema
+ * Verifica o status geral do sistema
  * @param {Object} req - Requisição Express
  * @param {Object} res - Resposta Express
  */
 async function healthCheck(req, res) {
     try {
-        logger.debug('Requisição de healthcheck recebida');
+        logger.info('Verificação de saúde iniciada');
 
-        // Informações do sistema
-        const uptime = process.uptime();
-        const memoryUsage = process.memoryUsage();
-        const systemInfo = {
-            platform: process.platform,
-            arch: process.arch,
-            nodeVersion: process.version,
-            cpus: os.cpus().length,
-            totalMemory: Math.round(os.totalmem() / (1024 * 1024)) + 'MB',
-            freeMemory: Math.round(os.freemem() / (1024 * 1024)) + 'MB'
+        // Informações básicas sobre o sistema
+        const health = {
+            status: 'UP',
+            timestamp: new Date().toISOString(),
+            version: process.env.npm_package_version || '1.0.0',
+            uptime: `${Math.floor(process.uptime())} segundos`,
+            memory: {
+                total: `${Math.round(process.memoryUsage().heapTotal / 1024 / 1024)} MB`,
+                used: `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB`
+            }
         };
 
-        // Verifica se o LM Studio está acessível
-        let lmStudioStatus = 'unknown';
-        try {
-            // Timeout curto para não bloquear a resposta
-            await axios.get(LM_STUDIO_CONFIG.apiUrl.split('/api')[0], { timeout: 2000 });
-            lmStudioStatus = 'online';
-        } catch (error) {
-            lmStudioStatus = 'offline';
-            logger.warn('LM Studio parece estar offline');
+        return res.status(200).json(health);
+    } catch (error) {
+        logger.error('Erro durante verificação de saúde:', { error: error.message, stack: error.stack });
+        return res.status(500).json({
+            status: 'DOWN',
+            error: error.message
+        });
+    }
+}
+
+/**
+ * Lista os temas de treinamento disponíveis
+ * @param {Object} req - Requisição Express
+ * @param {Object} res - Resposta Express
+ */
+async function treinamentoStatus(req, res) {
+    try {
+        logger.info('Verificação de status do treinamento iniciada');
+
+        // Reúne informações sobre os arquivos de treinamento carregados
+        const temas = Object.keys(treinamentoDados);
+        const resultado = {
+            status: temas.length > 0 ? 'OK' : 'ALERTA',
+            mensagem: temas.length > 0
+                ? `${temas.length} temas de treinamento carregados com sucesso`
+                : 'Nenhum tema de treinamento encontrado',
+            temas_disponiveis: temas,
+            detalhes: {}
+        };
+
+        // Adiciona detalhes sobre cada tema
+        for (const tema of temas) {
+            if (tema === 'empresa') {
+                resultado.detalhes[tema] = {
+                    nome: treinamentoDados[tema].nome,
+                    campos: Object.keys(treinamentoDados[tema])
+                };
+            } else if (tema === 'servicos') {
+                resultado.detalhes[tema] = {
+                    categorias: treinamentoDados[tema].categorias,
+                    campos: Object.keys(treinamentoDados[tema])
+                };
+            } else {
+                resultado.detalhes[tema] = {
+                    campos: Object.keys(treinamentoDados[tema])
+                };
+            }
         }
 
-        return res.json({
-            status: 'ok',
-            version,
-            uptime: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m ${Math.floor(uptime % 60)}s`,
-            memory: {
-                rss: Math.round(memoryUsage.rss / (1024 * 1024)) + 'MB',
-                heapTotal: Math.round(memoryUsage.heapTotal / (1024 * 1024)) + 'MB',
-                heapUsed: Math.round(memoryUsage.heapUsed / (1024 * 1024)) + 'MB'
-            },
-            system: systemInfo,
-            dependencies: {
-                lmStudio: lmStudioStatus
-            }
-        });
+        return res.status(200).json(resultado);
     } catch (error) {
-        logger.error('Erro ao executar healthcheck:', { error: error.message, stack: error.stack });
-        return res.status(500).json({ error: 'Erro ao executar healthcheck' });
+        logger.error('Erro durante verificação de treinamento:', { error: error.message, stack: error.stack });
+        return res.status(500).json({
+            status: 'ERRO',
+            error: error.message
+        });
     }
 }
 
 module.exports = {
-    healthCheck
+    healthCheck,
+    treinamentoStatus
 }; 

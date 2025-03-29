@@ -1,0 +1,94 @@
+{
+  "nome": "Integração Estratégica",
+  "descricao": "Site + Agente de IA: A Dupla Imbatível. Conecte seu site ao Agente de I.A: turbine a geração de leads e ofereça suporte instantâneo aos visitantes.",
+  "caracteristicas": [
+    "WebSite Essencial profissional",
+    "Agente de IA para atendimento 24/7",
+    "Integração entre site e WhatsApp",
+    "Dashboards de desempenho",
+    "SEO imbatível para posicionamento no Google",
+    "Suporte técnico prioritário"
+  ],
+  "beneficios": [
+    {
+      "titulo": "WebSite Turbinado",
+      "descricao": "Cansado de sites que não vendem? Seu novo site Next.js é lançado em 7 dias, com design que impressiona e tecnologia que converte visitantes em clientes."
+    },
+    {
+      "titulo": "SEO Imbatível",
+      "descricao": "Esqueça a briga por cliques! Posicione-se no topo do Google e conquiste os clientes certos, sem depender de anúncios caros e concorridos."
+    },
+    {
+      "titulo": "Agente de IA",
+      "descricao": "Deixe a inteligência artificial trabalhar por você! Atendimento 24/7 no WhatsApp, respostas personalizadas e vendas no piloto automático."
+    },
+    {
+      "titulo": "Conexão Total",
+      "descricao": "WhatsApp, redes sociais, e-mail... Integre tudo e centralize sua comunicação! Simplifique a vida do seu cliente e nunca perca uma oportunidade."
+    },
+    {
+      "titulo": "Zero Preocupação",
+      "descricao": "Hospedagem, suporte, manutenção... Deixe a parte técnica conosco e foque no que importa: fazer seu negócio bombar! Tudo isso por apenas R$ 74,75/mês."
+    },
+    {
+      "titulo": "Poder Ilimitado",
+      "descricao": "Escalabilidade, personalização, integrações... Seu site cresce com você! A tecnologia Next.js oferece flexibilidade total para acompanhar o ritmo do seu negócio."
+    }
+  ],
+  "vantagens": [
+    "Personalização: adapte o Agente de I.A ao seu negócio e responda às dúvidas mais frequentes dos seus clientes",
+    "Resultados comprovados: empresas que integram site e Agente de I.A aumentam em 30% a taxa de conversão",
+    "Economia: combine os dois serviços em um pacote com preço especial",
+    "Atendimento 24/7: nunca mais perca uma oportunidade de venda",
+    "Maior conversão: capture e qualifique leads automaticamente"
+  ],
+  "processo": [
+    {
+      "etapa": "Raio-X do Seu Negócio",
+      "descricao": "Mapeamos o que seu público quer e como te destacar no mercado brasileiro."
+    },
+    {
+      "etapa": "Plano de Ataque Digital",
+      "descricao": "Desenhamos uma estratégia matadora para seu site brilhar e vender mais."
+    },
+    {
+      "etapa": "Site Pronto pra Vender",
+      "descricao": "Em 7 dias, entregamos um site que impressiona no celular e no Google."
+    },
+    {
+      "etapa": "Topo do Google",
+      "descricao": "Colocamos você na frente com SEO profissional, para que dependa menos de anúncios caros."
+    },
+    {
+      "etapa": "Tudo Conectado",
+      "descricao": "Seu site + WhatsApp + Agente de I.A = mais leads e vendas no piloto automático."
+    },
+    {
+      "etapa": "Lucro Sem Parar",
+      "descricao": "Acompanhamos e otimizamos tudo para seu negócio decolar de vez."
+    }
+  ],
+  "depoimentos": [
+    {
+      "cliente": "Carlos Santos",
+      "empresa": "Consultoria RS",
+      "texto": "O atendimento por IA superou minhas expectativas. Economizei tempo e dinheiro, e meus clientes adoraram a rapidez nas respostas."
+    },
+    {
+      "cliente": "Roberto Almeida",
+      "empresa": "Restaurante Sabor",
+      "texto": "Melhor investimento que fiz para meu negócio. O site ficou pronto em 7 dias e já estou recebendo novos clientes."
+    }
+  ],
+  "perguntas_frequentes": [
+    {
+      "pergunta": "Quais os benefícios de integrar site e Agente de IA?",
+      "resposta": "A integração potencializa a geração de leads, melhora a experiência do usuário e aumenta a taxa de conversão, resultando em mais vendas para sua empresa."
+    },
+    {
+      "pergunta": "Como posso iniciar meu projeto com a KiSite?",
+      "resposta": "Entre em contato conosco via WhatsApp, e-mail ou formulário de contato para uma consultoria gratuita e descubra a melhor solução para o seu negócio."
+    }
+  ],
+  "resultado_esperado": "Conquiste mais clientes, economize tempo e dinheiro, e veja seu negócio decolar com nossas soluções digitais de alto impacto."
+}

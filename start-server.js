@@ -12,7 +12,8 @@ async function startServer() {
                 return;
             }
             console.log('PM2 iniciado com sucesso!');
-            
+
+            // Tenta iniciar o ngrok, mas continua mesmo em caso de erro
             try {
                 // Conecta o ngrok
                 console.log('Iniciando túnel ngrok...');
@@ -20,19 +21,24 @@ async function startServer() {
                     addr: SERVER_CONFIG.port,
                     authtoken: process.env.NGROK_AUTH_TOKEN // Opcional, mas recomendado
                 });
-                
+
                 console.log('=================================');
                 console.log('🚀 Servidor iniciado com sucesso!');
                 console.log(`📡 URL Local: http://localhost:${SERVER_CONFIG.port}`);
                 console.log(`🌎 URL Pública: ${url}`);
                 console.log('=================================');
-                
+
                 // Salva a URL do ngrok em um arquivo para referência
                 require('fs').writeFileSync('ngrok-url.txt', url);
-                
+
             } catch (ngrokError) {
-                console.error('Erro ao iniciar ngrok:', ngrokError);
-                exec('pm2 stop all'); // Para o servidor em caso de erro
+                console.error('Aviso: Não foi possível iniciar ngrok:', ngrokError.message);
+                console.log('=================================');
+                console.log('🚀 Servidor iniciado com sucesso!');
+                console.log(`📡 URL Local: http://localhost:${SERVER_CONFIG.port}`);
+                console.log('⚠️ URL Pública: Não disponível (ngrok não iniciado)');
+                console.log('=================================');
+                // Continua executando o servidor mesmo sem o ngrok
             }
         });
     } catch (error) {
@@ -43,7 +49,11 @@ async function startServer() {
 // Função para limpar recursos ao encerrar
 function cleanup() {
     exec('pm2 stop all', () => {
-        ngrok.kill();
+        try {
+            ngrok.kill();
+        } catch (error) {
+            console.error('Erro ao encerrar ngrok:', error.message);
+        }
         process.exit(0);
     });
 }

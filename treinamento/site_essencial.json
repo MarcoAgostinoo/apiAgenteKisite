@@ -1,0 +1,97 @@
+{
+  "nome": "Site Essencial",
+  "descricao": "A vitrine online da sua empresa em 7 dias: site profissional, responsivo e otimizado para o Google",
+  "caracteristicas": [
+    "Site 100% profissional",
+    "Lançamento em 7 dias úteis",
+    "Design responsivo",
+    "Integração com WhatsApp",
+    "3 contas de e-mail profissional",
+    "Landing Page ou até 5 páginas",
+    "40 fotos",
+    "Integração com mídias sociais",
+    "SEO avançado",
+    "Certificado SSL",
+    "Conformidade com LGPD",
+    "Suporte técnico"
+  ],
+  "preco": "R$ 897,00",
+  "prazo_entrega": "7 dias úteis",
+  "mensal": "R$ 74,75/mês para hospedagem e manutenção",
+  "parcelas": "ou R$ 224,25 em até 4x no PIX",
+  "inclui": [
+    "Domínio por 1 ano",
+    "Hospedagem por 1 ano",
+    "Certificado SSL",
+    "3 contas de e-mail profissionais",
+    "SEO avançado",
+    "Suporte técnico"
+  ],
+  "beneficios": [
+    {
+      "titulo": "Alcance clientes no celular",
+      "descricao": "85% dos brasileiros pesquisam no Google pelo smartphone (IBGE 2025)"
+    },
+    {
+      "titulo": "SEO otimizado",
+      "descricao": "Apareça nas buscas do Google e atraia clientes qualificados sem pagar por anúncios"
+    },
+    {
+      "titulo": "Tecnologia moderna",
+      "descricao": "Sites desenvolvidos com Next.js e Tailwind CSS, garantindo sites rápidos, seguros e escaláveis"
+    }
+  ],
+  "processos": [
+    {
+      "etapa": "Diagnóstico & Avaliação",
+      "descricao": "Analisamos as necessidades do seu negócio com uma avaliação gratuita e detalhada"
+    },
+    {
+      "etapa": "Planejamento & Proposta",
+      "descricao": "Desenvolvemos uma proposta personalizada, definindo estratégias e soluções ideais"
+    },
+    {
+      "etapa": "Desenvolvimento do Site",
+      "descricao": "Criamos seu site com design responsivo, moderno e otimizado para buscadores"
+    },
+    {
+      "etapa": "Implementação & Lançamento",
+      "descricao": "Finalizamos o projeto com testes rigorosos e entregamos sua solução pronta para uso"
+    }
+  ],
+  "depoimentos": [
+    {
+      "cliente": "João Silva",
+      "empresa": "Empresa ABC",
+      "texto": "O Site Essencial transformou meu negócio. Em apenas 7 dias úteis, tive um site profissional que aumentou minhas vendas em 40%."
+    },
+    {
+      "cliente": "Maria Oliveira",
+      "empresa": "Loja XYZ",
+      "texto": "Excelente custo-benefício! O site ficou pronto rapidamente e a equipe foi muito atenciosa durante todo o processo."
+    },
+    {
+      "cliente": "Roberto Almeida",
+      "empresa": "Restaurante Sabor",
+      "texto": "Melhor investimento que fiz para meu negócio. O site ficou pronto em 7 dias e já estou recebendo novos clientes."
+    }
+  ],
+  "perguntas_frequentes": [
+    {
+      "pergunta": "Qual o prazo de entrega do site?",
+      "resposta": "Sites essenciais são entregues em apenas 7 dias úteis, garantindo uma presença digital rápida e eficaz."
+    },
+    {
+      "pergunta": "O que está incluso no plano Site Essencial?",
+      "resposta": "O plano inclui design responsivo, SEO otimizado, integração com WhatsApp, contas de e-mail profissional e suporte técnico, tudo pensado para impulsionar seu negócio."
+    },
+    {
+      "pergunta": "Existe suporte pós-lançamento?",
+      "resposta": "Sim, oferecemos manutenção contínua, atualizações e suporte técnico para manter seu site sempre atualizado e seguro."
+    },
+    {
+      "pergunta": "Posso integrar o site com outras ferramentas digitais?",
+      "resposta": "Sim, integramos seu site com WhatsApp, Google Analytics e outras plataformas para centralizar sua comunicação e otimizar resultados."
+    }
+  ]
+}

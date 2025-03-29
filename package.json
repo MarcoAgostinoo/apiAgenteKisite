@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:prod": "node start-server.js",
+    "start:local": "node start-server-local.js",
     "stop": "pm2 stop all",
     "logs": "pm2 logs",
     "status": "pm2 status"
@@ -28,7 +29,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.1.0",
-    "ngrok": "^5.0.0-beta.2",
+    "ngrok": "^4.3.3",
     "qrcode-terminal": "^0.12.0",
     "whatsapp-web.js": "^1.26.0",
     "winston": "^3.17.0",

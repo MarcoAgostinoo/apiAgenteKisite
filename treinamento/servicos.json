@@ -1,0 +1,67 @@
+{
+  "categorias": [
+    "Site Essencial",
+    "Agente Inteligente",
+    "Integração Estratégica"
+  ],
+  "descricao_geral": "A KiSite oferece soluções digitais completas para empresas que desejam estabelecer ou aprimorar sua presença digital, evitando a perda de clientes.",
+  "site_essencial": {
+    "descricao": "A vitrine online da sua empresa em 7 dias: site profissional, responsivo e otimizado para o Google por apenas R$897.",
+    "tecnologias": ["Next.js", "Tailwind CSS", "Design responsivo", "SEO"],
+    "beneficios": [
+      "Alcance clientes no celular: 85% dos brasileiros pesquisam no Google pelo smartphone (IBGE 2025)",
+      "SEO otimizado: apareça nas buscas do Google e atraia clientes qualificados sem pagar por anúncios",
+      "Site 100% profissional",
+      "Design responsivo",
+      "Certificado SSL",
+      "Conformidade com LGPD"
+    ]
+  },
+  "agente_inteligente": {
+    "descricao": "Seu vendedor virtual: atenda clientes 24/7 no WhatsApp, tire dúvidas e gere leads automaticamente.",
+    "beneficios": [
+      "Economize até 6x: um Agente de atendimento inteligente custa menos que um vendedor CLT e não tem encargos",
+      "Aumente suas vendas: Agente de I.A geram 40% mais leads qualificados que o atendimento humano tradicional",
+      "Atendimento disponível 24 horas, 7 dias por semana",
+      "Sem encargos trabalhistas (atestados, férias, 13º, FGTS)",
+      "Custo 6x menor que um vendedor CLT"
+    ],
+    "plataformas": ["WhatsApp", "Site"]
+  },
+  "integracao_estrategica": {
+    "descricao": "Conecte seu site ao Agente de I.A: turbine a geração de leads e ofereça suporte instantâneo aos visitantes.",
+    "beneficios": [
+      "Personalização: adapte o Agente de I.A ao seu negócio e responda às dúvidas mais frequentes dos seus clientes",
+      "Resultados comprovados: empresas que integram site e Agente de I.A aumentam em 30% a taxa de conversão",
+      "Atendimento 24/7",
+      "Melhor experiência do usuário",
+      "Aumento nas conversões"
+    ]
+  },
+  "processo_trabalho": [
+    {
+      "etapa": "Diagnóstico & Avaliação",
+      "descricao": "Analisamos as necessidades do seu negócio com uma avaliação gratuita e detalhada."
+    },
+    {
+      "etapa": "Planejamento & Proposta",
+      "descricao": "Desenvolvemos uma proposta personalizada, definindo estratégias e soluções ideais."
+    },
+    {
+      "etapa": "Desenvolvimento do Site",
+      "descricao": "Criamos seu site com design responsivo, moderno e otimizado para buscadores."
+    },
+    {
+      "etapa": "Integração Opcional de Agente de IA",
+      "descricao": "Caso seja necessário, implementamos um agente virtual para atendimento e suporte, conforme a demanda do cliente."
+    },
+    {
+      "etapa": "Funcionalidades Extras (Opcional)",
+      "descricao": "Recursos adicionais, como campanhas de marketing digital ou tráfego pago, podem ser incorporados conforme a necessidade do seu negócio."
+    },
+    {
+      "etapa": "Implementação & Lançamento",
+      "descricao": "Finalizamos o projeto com testes rigorosos e entregamos sua solução pronta para uso."
+    }
+  ]
+}

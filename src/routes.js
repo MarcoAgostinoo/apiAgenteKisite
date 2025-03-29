@@ -29,9 +29,10 @@ router.get('/conversas/:userId', conversationController.getConversation);
 router.post('/conversas/limpar', conversationController.cleanConversations);
 
 /**
- * Rota de healthcheck
+ * Rotas de healthcheck
  * Verifica o status do sistema
  */
 router.get('/health', healthController.healthCheck);
+router.get('/treinamento', healthController.treinamentoStatus);
 
 module.exports = router; 
